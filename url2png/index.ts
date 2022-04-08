@@ -20,10 +20,10 @@ const fontUpdate = async () => {
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
     context.log('HTTP trigger function processed a request.');
-    const url = req.query.url || "https://example.com";
+    const url = "https://en.wikipedia.org/wiki/Face_with_Tears_of_Joy_emoji";
 
     try {
-        await fontUpdate();
+        //await fontUpdate();
 
         const browser = await puppeteer.launch({
             args: process.env.PUPPETEER_ARGS?.split(' ')
