@@ -1,0 +1,34 @@
+name: emoji processor
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@main
+
+      - name: "Login via Azure CLI"
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.DEV_RBAC_AZURE }}
+
+      - name: Publish the function
+        shell: bash
+        run: |
+          mkdir ~/.npm-global
+          npm config set prefix '~/.npm-global'
+          npm i -g azure-functions-core-tools@3 --unsafe-perm true
+          PATH=~/.npm-global/bin:$PATH
+          func azure functionapp publish linux-consumption-function --build remote --javascript
+
+      - name: logout
+        run: |
+          az logout
+        if: always()
