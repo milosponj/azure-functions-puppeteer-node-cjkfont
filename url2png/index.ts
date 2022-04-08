@@ -23,7 +23,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
     const url = "https://emojipedia.org/food-drink/";
 
     try {
-        //await fontUpdate();
+        await fontUpdate();
 
         const browser = await puppeteer.launch({
             args: process.env.PUPPETEER_ARGS?.split(' ')
