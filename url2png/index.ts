@@ -20,7 +20,7 @@ const fontUpdate = async () => {
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
     context.log('HTTP trigger function processed a request.');
-    const url = "https://en.wikipedia.org/wiki/Face_with_Tears_of_Joy_emoji";
+    const url = "https://emojipedia.org/food-drink/";
 
     try {
         //await fontUpdate();
